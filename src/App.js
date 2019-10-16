@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import List from "./Components/List";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      name: "Brooke",
+      list: ["Sunday", "Monday", "Tuesday"]
+    };
+  }
+
+  delete = index => {
+    let listCopy = [...this.state.list];
+    listCopy.splice(index, 1);
+    console.log(listCopy)
+    this.setState({
+      list: listCopy
+    })
+  };
+
+  render() {
+    console.log(this.state);
+    return (
+      <div className="App">
+        <div>{this.state.name}</div>
+        {this.state.list.map((element, index) => {
+          return <List day={element} index={index} delete={this.delete}/>;
+        })}
+      </div>
+    );
+  }
 }
 
 export default App;
